@@ -31,11 +31,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ],
       ),
       body: _widgetOptions.elementAt(choosenIndex),
-      bottomNavigationBar: bottomNavMenu(),
+      bottomNavigationBar: buildBottomNavMenu(),
     );
   }
 
-  BottomNavigationBar bottomNavMenu(){
+  BottomNavigationBar buildBottomNavMenu(){
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(

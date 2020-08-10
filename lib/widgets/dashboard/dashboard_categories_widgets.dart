@@ -13,6 +13,7 @@ class _DashBoardCategoriesWidgetsState extends State<DashBoardCategoriesWidgets>
   List<Category> _categoryList = List<Category>();
 
 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -21,21 +22,7 @@ class _DashBoardCategoriesWidgetsState extends State<DashBoardCategoriesWidgets>
   }
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(itemBuilder: (context,index){
-      return Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(_categoryList[index].category_name,style: _customTextStyle(),),
-            ],
-          ),
-        ),
-      );
-    },
-      itemCount: _categoryList.length,
-    );
+    return buildCategoryListView();
   }
 
   void getCategoriesFromApi() {
@@ -47,8 +34,12 @@ class _DashBoardCategoriesWidgetsState extends State<DashBoardCategoriesWidgets>
   });
   }
 
-  buildFirstRow() {
-
+  buildCategoryListView() {
+    return ListView.builder(itemBuilder: (context,index){
+      return buildCategoryCardItem(context,index);
+    },
+      itemCount: _categoryList.length,
+    );
   }
 
   _customTextStyle() {
@@ -59,9 +50,19 @@ class _DashBoardCategoriesWidgetsState extends State<DashBoardCategoriesWidgets>
     );
   }
 
+  buildCategoryCardItem(BuildContext context, int index) {
+    return Card(
+      elevation: 4,
+      child: ListTile(
+        onTap: ()=>Navigator.pushNamed(context, "/categoryDetail/$index"),
+        title: Text(_categoryList[index].category_name,style: _customTextStyle(),),
+        trailing: Icon(Icons.arrow_forward),
+      ),
+    );
+  }
+
 
 
 
   
-
 }

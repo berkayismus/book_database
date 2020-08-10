@@ -1,3 +1,4 @@
+import 'package:book_database/screen/category_detail_screen.dart';
 import 'package:book_database/screen/dashboard_screen.dart';
 import 'package:book_database/screen/main_screen.dart';
 import 'package:book_database/screen/register_screen.dart';
@@ -19,6 +20,15 @@ class MyApp extends StatelessWidget {
         "/" : (context) => MainScreen(),
         "/dashboard" : (context) => DashBoardScreen(),
         "/register" : (context) => RegisterScreen(),
+      },
+      onGenerateRoute: (RouteSettings settings){
+        List<String> pathElemanlari = settings.name.split("/"); //  / categoryDetail / 1
+        if(pathElemanlari[1]=='categoryDetail'){
+          return MaterialPageRoute(builder: (context)=> CategoryDetailScreen(int.parse(pathElemanlari[2])));
+        }
+        else{
+          return null;
+        }
       },
     );
   }
