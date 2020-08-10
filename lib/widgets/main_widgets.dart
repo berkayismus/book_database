@@ -1,6 +1,8 @@
 import 'package:book_database/data/api/user_api.dart';
 import 'package:book_database/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class MainWidgets extends StatefulWidget {
   @override
@@ -23,6 +25,10 @@ class _MainWidgetsState extends State<MainWidgets> {
   // messages
   String message="";
 
+  // SP ile giriş kontrolü için sayaç tanımlama
+  int _counter = 0;
+
+
 
   @override
   void initState() {
@@ -30,6 +36,9 @@ class _MainWidgetsState extends State<MainWidgets> {
     super.initState();
     _userNameController = TextEditingController();
     _userPasswordController = TextEditingController();
+    // başlangıçta giriş sayacının bilgisini getirme - daha önce giriş yapıldıysa _counter>0 olacak
+    _loadCounter();
+
   }
 
   @override
@@ -120,6 +129,10 @@ class _MainWidgetsState extends State<MainWidgets> {
     setState(() {
       message = response["message"];
       if(response["tf"] == true) {
+        // daha önceden giriş yapılmadıysa giriş sayacını 1 arttıralım
+        if(_counter==0){
+          _incrementCounter();
+        }
         // yönlendirme yapmak için
        Navigator.pop(context);
        Navigator.pushNamed(context, "/dashboard");
@@ -139,5 +152,46 @@ class _MainWidgetsState extends State<MainWidgets> {
     return Text(
       message
     );
+  }
+
+  buildCountNumberMessage(){
+    return Text(
+      _counter.toString()
+    );
+  }
+
+
+
+  // giriş sayacını getiren fonk.
+  _loadCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // varsa sp değeri countera onu ata, yoksa sıfır ata
+      _counter = (prefs.getInt('counter') ?? 0);
+      // en az 1 defa giriş yapıldıysa dashboard sayfasına yönlendirelim
+      if(_counter>0){
+        Navigator.pop(context);
+        Navigator.pushNamed(context, "/dashboard");
+      }
+    });
+  }
+
+  // giriş butonuna basıldığında _counter değerini 1 arttıran fonksiyon
+  _incrementCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _counter = (prefs.getInt('counter') ?? 0) + 1;
+      prefs.setInt('counter', _counter);
+    });
+  }
+
+
+
+  // giriş sayacını silmek için kullanılabilir, örneğin logout işleminde
+  Future _spRemove() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.remove('counter');
+    });
   }
 }

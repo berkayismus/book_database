@@ -24,6 +24,7 @@ dependencies:
   http:
   flutter:
     sdk: flutter
+  shared_preferences: ^0.5.8
 
 
 
