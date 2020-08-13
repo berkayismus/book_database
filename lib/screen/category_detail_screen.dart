@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:book_database/data/api/book_api.dart';
+import 'package:book_database/models/book.dart';
 import 'package:flutter/material.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
@@ -15,6 +19,18 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   int categoryIndex;
   _CategoryDetailScreenState(this.categoryIndex);
 
+  // kategoriye göre kitapları getirelim
+  List<Book> _bookList = List<Book>();
+  bool bookListState = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getBooksByCategoryId();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,23 +44,39 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   buildBody() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: <Widget>[
-          buildFirstRow(),
-        ],
-      ),
+      child: bookListState==true ? buildBooksListView() : Container(),
     );
   }
 
-  buildFirstRow() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5,bottom: 5),
-      child: Row(
-        children: <Widget>[
-          Text("Kategori ID : $categoryIndex"),
-        ],
-      ),
-    );
+  buildBooksListView() {
+    return ListView.builder(
+        itemCount: _bookList.length,
+        itemBuilder: (context,index){
+      return ListTile(
+        leading: Icon(Icons.book),
+        title: Text(_bookList[index].book_name),
+        onTap: (){_bookClicked(index);},
+      );
+    });
+  }
+
+
+
+
+
+  void getBooksByCategoryId() {
+    // kategori id'e göre kitapları getiren async fonksiyon
+    BookApi.getBooksByCategoryId("${categoryIndex+1}").then((response) {
+      setState(() {
+        Iterable bookList = jsonDecode(response.body);
+        this._bookList = bookList.map((book) => Book.fromJson(book)).toList();
+        bookListState = true;
+      });
+    });
+  }
+
+  void _bookClicked(int index) {
+    debugPrint("${_bookList[index].book_name} kitabına tıklandı");
   }
 }
 
