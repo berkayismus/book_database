@@ -27,6 +27,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       appBar: AppBar(
         title: Text("DashBoard Ekranı"),
         actions: <Widget>[
+          IconButton(iconSize: 24,onPressed: _goToAddCategory,icon: Icon(Icons.add),),
+          IconButton(iconSize: 24,onPressed: _goToUpdateCategory,icon: Icon(Icons.update),),
+          IconButton(iconSize: 24,onPressed: _goToDeleteCategory,icon: Icon(Icons.delete),),
           IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),),
         ],
       ),
@@ -69,5 +72,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       Navigator.pop(context);
       Navigator.pushNamed(context, "/");
     });
+  }
+
+  void _goToAddCategory() {
+    // kategori ekleme sayfasına götüren fonksiyon
+    Navigator.pushNamed(context, "/categoryAdd");
+  }
+
+  void _goToUpdateCategory() {
+    // kategori güncelleme sayfasına götüren fonksiyon
+    Navigator.pushNamed(context, "/categoryUpdate");
+  }
+
+  void _goToDeleteCategory() {
+
   }
 }

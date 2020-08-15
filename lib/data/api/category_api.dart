@@ -22,5 +22,17 @@ class CategoryApi{
       throw("Kategoriler getirilirken hata");
     }
   }
+
+  static Future categoryAdd(String categoryName)async {
+    var data = {
+      "category_name":categoryName
+    };
+    var response = await http.post(base_url+"/ibdb/categories/add/index.php",body: data);
+    if(response.statusCode == 200){
+      return response;
+    } else{
+      throw("Kategori eklerken hata yaşandı");
+    }
+  }
   
 }
