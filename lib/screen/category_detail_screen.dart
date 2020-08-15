@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:book_database/data/api/book_api.dart';
+import 'package:book_database/data/api/category_api.dart';
 import 'package:book_database/models/book.dart';
+import 'package:book_database/models/category.dart';
 import 'package:flutter/material.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
@@ -71,6 +73,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
         Iterable bookList = jsonDecode(response.body);
         this._bookList = bookList.map((book) => Book.fromJson(book)).toList();
         bookListState = true;
+        //debugPrint(categoryIndex.toString());// yanlış gösteriyor
       });
     });
   }

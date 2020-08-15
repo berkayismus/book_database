@@ -34,5 +34,30 @@ class CategoryApi{
       throw("Kategori eklerken hata yaşandı");
     }
   }
+
+  static Future categoryUpdate(String categoryId,String categoryName) async {
+    var data = {
+      "category_id":categoryId,
+      "category_name":categoryName
+    };
+    var response = await http.post(base_url+"/ibdb/categories/update/index.php",body: data);
+    if(response.statusCode==200){
+      return response;
+    } else{
+      throw("Kategori güncellenirken hata");
+    }
+  }
+
+  static Future categoryDelete(String categoryId) async {
+    var data = {
+      "category_id":categoryId
+    };
+    var response = await http.post(base_url+"/ibdb/categories/delete/index.php",body: data);
+    if(response.statusCode==200){
+      return response;
+    } else{
+      throw("Kategori silinirken hata");
+    }
+  }
   
 }

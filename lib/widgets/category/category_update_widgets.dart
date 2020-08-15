@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:book_database/data/api/category_api.dart';
 import 'package:book_database/models/category.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,9 @@ class _CategoryUpdateWidgetsState extends State<CategoryUpdateWidgets> {
   // controllers
   TextEditingController _categoryNameController;
 
+  // messages
+  String _message = "";
+
   @override
   void initState() {
     // TODO: implement initState
@@ -52,6 +57,7 @@ class _CategoryUpdateWidgetsState extends State<CategoryUpdateWidgets> {
           buildFirstRow(),
           _updateFieldState == true ? buildSecondRow() :  Container(),
           _buttonsVisibleState == true ? buildThirthRow() : Container(),
+          buildMessageRow(),
         ],
       ),
     );
@@ -158,13 +164,31 @@ class _CategoryUpdateWidgetsState extends State<CategoryUpdateWidgets> {
       _updateFieldState = true;
       if(_categoryNameController.text!=""){
         // kategori güncelleyen api çalışacak
+        CategoryApi.categoryUpdate(_selectedCategory.category_id.toString(), _categoryNameController.text)
+            .then((response) {
+              setState(() {
+                var jsonData = jsonDecode(response.body);
+                _message = jsonData["message"];
+                _categories.clear();
+                _categoryItems.clear();
+                getCategoriesFromApi();
+              });
+        });
       }
     });
   }
 
   void _categoryDeleteButtonClicked() {
     // kategori sil butona basıldığında burası çalışacak
-
+    CategoryApi.categoryDelete(_selectedCategory.category_id.toString()).then((response) {
+      setState(() {
+        var jsonData = jsonDecode(response.body);
+        _message = jsonData["message"];
+        _categories.clear();
+        _categoryItems.clear();
+        getCategoriesFromApi();
+      });
+    });
   }
 
   buildSecondRow() {
@@ -185,6 +209,13 @@ class _CategoryUpdateWidgetsState extends State<CategoryUpdateWidgets> {
 
         ],
       ),
+    );
+  }
+
+  buildMessageRow() {
+    return Text(
+      _message,
+      style: _customTextStyle(),
     );
   }
 }
