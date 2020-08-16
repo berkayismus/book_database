@@ -17,6 +17,28 @@ class BookApi{
         throw("Kitaplar getirilirken hata");
       }
     }
+
+
+    static Future addBook(Book book) async {
+      Map data = {
+        "book_name":book.book_name,
+        "book_detail":book.book_detail,
+        "book_page_number":book.book_page_number.toString(),
+        "book_publisher":book.book_publisher,
+        "book_status":book.book_status.toString(),
+        "book_total_score":book.book_total_score.toString(),
+        "book_total_rep":book.book_total_rep.toString(),
+        "book_average_score":book.book_average_score.toString(),
+        "category_id":book.category_id,
+        "book_author":book.book_author
+      };
+      var response = await http.post(base_url+"/ibdb/books/add/index.php",body: data);
+      if(response.statusCode==200){
+        return response;
+      }else{
+        throw("Kitap eklerken hata");
+      }
+    }
   
   }
 

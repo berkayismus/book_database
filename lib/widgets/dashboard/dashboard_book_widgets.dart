@@ -9,7 +9,8 @@ class _DashBoardBookWidgetsState extends State<DashBoardBookWidgets> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Kitaplar Sayfası"),
+      child: Text("Kitaplar sayfası"),
     );
   }
 }
+

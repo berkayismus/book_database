@@ -1,12 +1,12 @@
 import 'package:book_database/widgets/main_widgets.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _LoginScreenState extends State<LoginScreen> {
 
   String _haveStarted3Times = '';
 

@@ -1,6 +1,6 @@
 import 'file:///C:/Users/Berkayismus/AndroidStudioProjects/book_database/lib/widgets/dashboard/dashboard_categories_widgets.dart';
 import 'file:///C:/Users/Berkayismus/AndroidStudioProjects/book_database/lib/widgets/dashboard/dashboard_main_widgets.dart';
-import 'package:book_database/widgets/dashboard/dashboard_profile_widgets.dart';
+import 'package:book_database/widgets/dashboard/dashboard_book_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,14 +25,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("DashBoard Ekranı"),
-        actions: <Widget>[
-          choosenIndex == 1 ?  _buildCategoryIconButton1() : Container(),
-          choosenIndex == 1 ? _buildCategoryIconButton2() : Container(),
-          choosenIndex == 1 ? _buildCategoryIconButton3() : Container(),
-          choosenIndex == 2 ? _buildBookIconButton1() : Container(),
-          choosenIndex == 2 ? _buildBookIconButton2() : Container(),
-        ],
+        title: Text(_buildTitleText()),
+        actions: _buildIconButton(),
       ),
       body: _widgetOptions.elementAt(choosenIndex),
       bottomNavigationBar: buildBottomNavMenu(),
@@ -85,38 +79,48 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     Navigator.pushNamed(context, "/categoryUpdate");
   }
 
-  void _goToDeleteCategory() {
-
-  }
-
-  _buildCategoryIconButton1() {
-    return IconButton(iconSize: 24,onPressed: _goToAddCategory,icon: Icon(Icons.add),);
-  }
-
-  _buildCategoryIconButton2() {
-    return IconButton(iconSize: 24,onPressed: _goToUpdateCategory,icon: Icon(Icons.update),);
-  }
-
-  _buildCategoryIconButton3() {
-    return IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),);
-  }
-
-  _buildBookIconButton1() {
-    return IconButton(iconSize: 24,onPressed: _goToAddBook,icon: Icon(Icons.add),);
-  }
-
-  _buildBookIconButton2(){
-    return IconButton(iconSize: 24, onPressed: _goToUpdateBook,icon: Icon(Icons.update),);
-  }
-
   void _goToAddBook() {
     // tıklayınca kitap eklemeye götürecek fonksiyon
-    debugPrint("Kitap ekleye basıldı");
+    Navigator.pushNamed(context, "/bookAdd");
   }
 
   void _goToUpdateBook() {
     // tıklayınca kitap güncellemeye götürecek fonksiyon
-    debugPrint("Kitap güncelleye basıldı");
+    //Navigator.pushNamed(context, "/bookUpdate");
+  }
 
+  String _buildTitleText() {
+    if(choosenIndex==0){
+      return "Anasayfa";
+    } else if(choosenIndex==1){
+      return "Kategoriler";
+    } else if(choosenIndex==2){
+      return "Kitaplar";
+    } else{
+      return "";
+    }
+  }
+
+  List<Widget> _buildIconButton(){
+    var iconButtonList = new List<Widget>();
+    if(choosenIndex==0){
+      iconButtonList.clear();
+      iconButtonList.add(IconButton(iconSize: 24,onPressed: (){},icon: Icon(Icons.map),));
+      return iconButtonList;
+    }
+    else if(choosenIndex==1){
+      iconButtonList.clear();
+      iconButtonList.add(IconButton(iconSize: 24,onPressed: _goToAddCategory,icon: Icon(Icons.add),));
+      iconButtonList.add(IconButton(iconSize: 24,onPressed: _goToUpdateCategory,icon: Icon(Icons.update),));
+      iconButtonList.add(IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),));
+      return iconButtonList;
+    } else if(choosenIndex==2){
+      iconButtonList.clear();
+      iconButtonList.add(IconButton(iconSize: 24,onPressed: _goToAddBook,icon: Icon(Icons.add),));
+      iconButtonList.add(IconButton(iconSize: 24, onPressed: _goToUpdateBook,icon: Icon(Icons.update),));
+      return iconButtonList;
+    } else if(choosenIndex==3) {
+      return null;
+    }
   }
 }
