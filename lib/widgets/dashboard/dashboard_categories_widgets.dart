@@ -54,11 +54,16 @@ class _DashBoardCategoriesWidgetsState extends State<DashBoardCategoriesWidgets>
     return Card(
       elevation: 4,
       child: ListTile(
-        onTap: ()=>Navigator.pushNamed(context, "/categoryDetail/$index"),
+        onTap: (){categoryItemClicked(context,index);},
         title: Text(_categoryList[index].category_name,style: _customTextStyle(),),
         trailing: Icon(Icons.arrow_forward),
       ),
     );
+  }
+
+  void categoryItemClicked(BuildContext context, int index) {
+        String currentCategoryId = _categoryList[index].category_id;
+        Navigator.pushNamed(context, "/categoryDetail/"+currentCategoryId);
   }
 
 

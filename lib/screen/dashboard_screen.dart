@@ -18,7 +18,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     DashBoardMainWidgets(),
     DashBoardCategoriesWidgets(),
-    DashBoardProfileWidgets(),
+    DashBoardBookWidgets(),
   ];
 
   @override
@@ -27,10 +27,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       appBar: AppBar(
         title: Text("DashBoard Ekranı"),
         actions: <Widget>[
-          IconButton(iconSize: 24,onPressed: _goToAddCategory,icon: Icon(Icons.add),),
-          IconButton(iconSize: 24,onPressed: _goToUpdateCategory,icon: Icon(Icons.update),),
-          IconButton(iconSize: 24,onPressed: _goToDeleteCategory,icon: Icon(Icons.delete),),
-          IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),),
+          choosenIndex == 1 ?  _buildCategoryIconButton1() : Container(),
+          choosenIndex == 1 ? _buildCategoryIconButton2() : Container(),
+          choosenIndex == 1 ? _buildCategoryIconButton3() : Container(),
+          choosenIndex == 2 ? _buildBookIconButton1() : Container(),
+          choosenIndex == 2 ? _buildBookIconButton2() : Container(),
         ],
       ),
       body: _widgetOptions.elementAt(choosenIndex),
@@ -48,8 +49,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           icon: Icon(Icons.search),
           title: Text("Kategoriler"),
         ),BottomNavigationBarItem(
-          icon: Icon(Icons.verified_user),
-          title: Text("Profil"),
+          icon: Icon(Icons.book),
+          title: Text("Kitaplar"),
         ),
       ],
       currentIndex: choosenIndex,
@@ -85,6 +86,37 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   }
 
   void _goToDeleteCategory() {
+
+  }
+
+  _buildCategoryIconButton1() {
+    return IconButton(iconSize: 24,onPressed: _goToAddCategory,icon: Icon(Icons.add),);
+  }
+
+  _buildCategoryIconButton2() {
+    return IconButton(iconSize: 24,onPressed: _goToUpdateCategory,icon: Icon(Icons.update),);
+  }
+
+  _buildCategoryIconButton3() {
+    return IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),);
+  }
+
+  _buildBookIconButton1() {
+    return IconButton(iconSize: 24,onPressed: _goToAddBook,icon: Icon(Icons.add),);
+  }
+
+  _buildBookIconButton2(){
+    return IconButton(iconSize: 24, onPressed: _goToUpdateBook,icon: Icon(Icons.update),);
+  }
+
+  void _goToAddBook() {
+    // tıklayınca kitap eklemeye götürecek fonksiyon
+    debugPrint("Kitap ekleye basıldı");
+  }
+
+  void _goToUpdateBook() {
+    // tıklayınca kitap güncellemeye götürecek fonksiyon
+    debugPrint("Kitap güncelleye basıldı");
 
   }
 }

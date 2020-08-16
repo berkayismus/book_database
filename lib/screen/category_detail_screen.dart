@@ -7,7 +7,7 @@ import 'package:book_database/models/category.dart';
 import 'package:flutter/material.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
-  int categoryIndex;
+  String categoryIndex;
   CategoryDetailScreen(this.categoryIndex);
 
   @override
@@ -18,7 +18,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
 
   // dashboard ekranında kategorilere tıklandığında bu sayfaya constructor vasıtasıyla bir index değeri gelecek
   // bu categoryIndex değeri ile tıklanan kategorinin ID'sini alabileceğiz
-  int categoryIndex;
+  String categoryIndex;
   _CategoryDetailScreenState(this.categoryIndex);
 
   // kategoriye göre kitapları getirelim
@@ -68,7 +68,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
 
   void getBooksByCategoryId() {
     // kategori id'e göre kitapları getiren async fonksiyon
-    BookApi.getBooksByCategoryId("${categoryIndex+1}").then((response) {
+    BookApi.getBooksByCategoryId("${categoryIndex}").then((response) {
       setState(() {
         Iterable bookList = jsonDecode(response.body);
         this._bookList = bookList.map((book) => Book.fromJson(book)).toList();

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class DashBoardProfileWidgets extends StatefulWidget {
+class DashBoardBookWidgets extends StatefulWidget {
   @override
-  _DashBoardProfileWidgetsState createState() => _DashBoardProfileWidgetsState();
+  _DashBoardBookWidgetsState createState() => _DashBoardBookWidgetsState();
 }
 
-class _DashBoardProfileWidgetsState extends State<DashBoardProfileWidgets> {
+class _DashBoardBookWidgetsState extends State<DashBoardBookWidgets> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Profil sayfası"),
+      child: Text("Kitaplar Sayfası"),
     );
   }
 }

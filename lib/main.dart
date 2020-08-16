@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings settings){
         List<String> pathElemanlari = settings.name.split("/"); //  / categoryDetail / 1
         if(pathElemanlari[1]=='categoryDetail'){
-          return MaterialPageRoute(builder: (context)=> CategoryDetailScreen(int.parse(pathElemanlari[2])));
+          return MaterialPageRoute(builder: (context)=> CategoryDetailScreen(pathElemanlari[2]));
         }
         else{
           return null;
