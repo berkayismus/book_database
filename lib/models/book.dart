@@ -35,6 +35,9 @@ class Book{
 
   }
 
+  Book.forUpdate(this.book_name,this.book_detail,this.book_page_number,
+      this.book_publisher,this.book_author);
+
   Book.fromJson(Map json){
     this.book_id = json["book_id"];
     this.category_id = json["category_id"];

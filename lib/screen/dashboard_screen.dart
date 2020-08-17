@@ -86,7 +86,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   void _goToUpdateBook() {
     // tıklayınca kitap güncellemeye götürecek fonksiyon
-    //Navigator.pushNamed(context, "/bookUpdate");
+    Navigator.pushNamed(context, "/bookUpdate");
   }
 
   String _buildTitleText() {
