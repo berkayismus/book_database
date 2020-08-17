@@ -65,6 +65,16 @@ class BookApi{
         throw("Kitap güncellerken hata");
       }
     }
+
+    static Future deleteBook(String book_id) async {
+      Map data = {"book_id":book_id};
+      var response = await http.post("$base_url/ibdb/books/delete/index.php",body: data);
+      if(response.statusCode==200){
+        return response;
+      } else{
+        throw("Kitap silerken hata");
+      }
+    }
   
   }
 

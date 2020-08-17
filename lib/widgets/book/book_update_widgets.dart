@@ -30,6 +30,11 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
   List<DropdownMenuItem<Book>> _bookItems = List<DropdownMenuItem<Book>>();
   Book _selectedBook;
 
+  // states
+  bool _fieldState = false;
+  bool _updateButtonState = false;
+  bool _buttonsState = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -60,15 +65,16 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
       child: Column(
         children: <Widget>[
           buildBooksField(),
-          buildBookNameField(),
-          buildBookDetailField(),
-          bookAuthorNameField(),
-          buildBookPageNumberField(),
-          buildBookPublisherField(),
+          _fieldState == true ? buildBookNameField() : Container(),
+          _fieldState == true ? buildBookDetailField() : Container(),
+          _fieldState == true ? bookAuthorNameField() : Container(),
+          _fieldState == true ? buildBookPageNumberField() : Container(),
+          _fieldState == true ? buildBookPublisherField() : Container(),
           //buildBookTotalScoreField(),
           //buildBookTotalRepField(),
           //buildBookAverageScoreField(),
-          buildButtonsField(),
+          _buttonsState == true ? buildButtonsField() : Container(),
+          _updateButtonState == true ? buildUpdateButtonField() : Container(),
           buildMessageField(),
 
         ],
@@ -188,10 +194,10 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
           ),
           SizedBox(width: 5,),
           FlatButton(
-            child: Text("Temizle"),
+            child: Text("Sil"),
             color: Colors.pink,
             textColor: Colors.white,
-            onPressed: _bookResetClicked,
+            onPressed: _bookDeleteClicked,
           ),
         ],
       ),
@@ -200,41 +206,24 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
 
   void _bookUpdateClicked() {
     // kitap güncelleme butonuna basıldığında burası çalışacak
-    String bookName = _bookNameController.text;
-    String bookDetail = _bookDetailController.text;
-    int bookPageNumber = int.tryParse(_bookPageNumberController.text);
-    String bookPublisher = _bookPublisherController.text;
-    int bookStatus = 1;
-    double bookTotalScore = 10;
-    double bookTotalRep = 2;
-    double bookAverageScore = 5;
-    String categoryId = _selectedBook.category_id;
-    String bookAuthor = _bookAuthorNameController.text;
-
-    Book updatedBook = Book.forUpdate(bookName,bookDetail,bookPageNumber,
-        bookPublisher,bookAuthor);
-
-    String bookId = _selectedBook.book_id;
-
-    // api çalıştırılacak
-    BookApi.updateBook(updatedBook,bookId).then((response) {
-      setState(() {
-        var jsonData = jsonDecode(response.body);
-        _message = jsonData["message"];
-      });
+    setState(() {
+      _fieldState = true;
+      _updateButtonState = true;
+      _buttonsState = false;
     });
   }
 
-  void _bookResetClicked() {
-      // temizle butonuna basıldığında burası çalışacak
+  void _bookDeleteClicked() {
+    debugPrint("Kitap sil'e basıldı");
+    BookApi.deleteBook(_selectedBook.book_id).then((response) {
       setState(() {
-        _bookNameController.text = "";
-        _bookDetailController.text = "";
-        _bookPageNumberController.text = "";
-        _bookPublisherController.text = "";
-        _bookAuthorNameController.text = "";
-        _message = "";
+        var jsonData = jsonDecode(response.body);
+        _message = jsonData["message"];
+        _bookList.clear();
+        _bookItems.clear();
+        getBooksFromApi();
       });
+    });
   }
 
   buildBooksField() {
@@ -315,5 +304,70 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
     _bookPublisherController.text = _selectedBook.book_publisher;
   }
 
+  buildUpdateButtonField() {
+    return Padding(
+      padding: EdgeInsets.only(top: fieldSpaceHeight,bottom: fieldSpaceHeight),
+      child: Row(
+        children: <Widget>[
+          FlatButton(
+            child: Text("Güncelle"),
+            color: Colors.green,
+            textColor: Colors.white,
+            onPressed: _bookUpdate,
+          ),
+          SizedBox(width: fieldSpaceWidth,),
+          FlatButton(
+            child: Text("Temizle"),
+            color: Colors.pink,
+            textColor: Colors.white,
+            onPressed: _fieldsResetClicked,
+          ),
+        ],
+      ),
+    );
+  }
 
+
+
+  void _fieldsResetClicked() {
+     // temizle butonuna basıldığında burası çalışacak
+      setState(() {
+        _bookNameController.text = "";
+        _bookDetailController.text = "";
+        _bookPageNumberController.text = "";
+        _bookPublisherController.text = "";
+        _bookAuthorNameController.text = "";
+        _message = "";
+      });
+  }
+
+  void _bookUpdate() {
+    // kitap güncelleme butonuna basıldığında burası çalışacak
+    String bookName = _bookNameController.text;
+    String bookDetail = _bookDetailController.text;
+    int bookPageNumber = int.tryParse(_bookPageNumberController.text);
+    String bookPublisher = _bookPublisherController.text;
+    int bookStatus = 1;
+    double bookTotalScore = 10;
+    double bookTotalRep = 2;
+    double bookAverageScore = 5;
+    String categoryId = _selectedBook.category_id;
+    String bookAuthor = _bookAuthorNameController.text;
+
+    Book updatedBook = Book.forUpdate(bookName,bookDetail,bookPageNumber,
+        bookPublisher,bookAuthor);
+
+    String bookId = _selectedBook.book_id;
+
+    // api çalıştırılacak
+    BookApi.updateBook(updatedBook,bookId).then((response) {
+      setState(() {
+        var jsonData = jsonDecode(response.body);
+        _message = jsonData["message"];
+        _bookList.clear();
+        _bookItems.clear();
+        getBooksFromApi();
+      });
+    });
+  }
 }
