@@ -30,8 +30,7 @@ class UserApi{
     };
     var response = await http.post(baseUrl+"/ibdb/user/register/index.php",body: data);
     if(response.statusCode == 200){
-      var jsonData = jsonDecode(response.body);
-      return jsonData;
+      return response;
     } else{
       throw("Kayıt olunurken hata");
     }

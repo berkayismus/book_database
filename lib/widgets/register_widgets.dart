@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:book_database/data/api/user_api.dart';
 import 'package:book_database/models/user.dart';
 import 'package:flutter/cupertino.dart';
@@ -150,16 +152,26 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
 
 
   void _registerButtonClicked() async {
-    debugPrint("Kayıt butonuna basıldı");
     // girilen iki password eşleşiyor mu
     bool passControl = userPasswordControl();
     if(passControl){
       // kayıt gerçekleştir
-      var user = User.forRegister(_userNameController.text,_userEmailController.text,_userPasswordController.text);
-      var jsonResponse = await UserApi.userRegister(user);
-      setState(() {
-        message = jsonResponse["message"];
-      });
+      String userName = _userNameController.text;
+      String userEmail = _userEmailController.text;
+      String userPassword = _userPasswordController.text;
+      if(userName.isNotEmpty && userEmail.isNotEmpty && userPassword.isNotEmpty){
+        var user = User.forRegister(userName,userEmail,userPassword);
+        UserApi.userRegister(user).then((response) {
+          setState(() {
+            var jsonData = jsonDecode(response.body);
+            message = jsonData["message"];
+          });
+        });
+      } else{
+        setState(() {
+          message = "Alanlar boş geçilemez";
+        });
+      }
     } else{
       setState(() {
         message = "Girdiğiniz iki parola eşleşmelidir";
@@ -180,9 +192,17 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
       padding: EdgeInsets.only(top: filedPaddingSpace,bottom: filedPaddingSpace),
       child: Row(
         children: <Widget>[
-          Text(message),
+          Text(message,style: _customTextStyle(),),
         ],
       ),
+    );
+  }
+
+  _customTextStyle() {
+    return TextStyle(
+      color: Colors.pink,
+      fontSize: 22,
+      fontWeight: FontWeight.bold,
     );
   }
 }

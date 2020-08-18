@@ -1,4 +1,4 @@
-import 'package:book_database/widgets/main_widgets.dart';
+import 'package:book_database/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text("Book DB Ana Sayfa"),
       ),
 
-      body: MainWidgets(),
+      body: LoginWidgets(),
     );
   }
 }

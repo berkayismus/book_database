@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class MainWidgets extends StatefulWidget {
+class LoginWidgets extends StatefulWidget {
   @override
-  _MainWidgetsState createState() => _MainWidgetsState();
+  _LoginWidgetsState createState() => _LoginWidgetsState();
 }
 
-class _MainWidgetsState extends State<MainWidgets> {
+class _LoginWidgetsState extends State<LoginWidgets> {
 
   TextEditingController _userNameController;
   TextEditingController _userPasswordController;
@@ -150,7 +150,7 @@ class _MainWidgetsState extends State<MainWidgets> {
 
   buildFourthRow() {
     return Text(
-      message
+      message,style: _customTextStyle(),
     );
   }
 
@@ -193,5 +193,13 @@ class _MainWidgetsState extends State<MainWidgets> {
     setState(() {
       prefs.remove('counter');
     });
+  }
+
+  _customTextStyle() {
+    return TextStyle(
+      color: Colors.pink,
+      fontWeight: FontWeight.bold,
+      fontSize: 20,
+    );
   }
 }
