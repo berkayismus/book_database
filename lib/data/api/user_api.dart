@@ -35,5 +35,14 @@ class UserApi{
       throw("Kayıt olunurken hata");
     }
   }
+  
+  static Future getUserByUserId(String userId) async {
+    var response = await http.get("$baseUrl/ibdb/user/get/?user_id=$userId");
+    if(response.statusCode==200){
+      return response;
+    }else{
+      throw("User getirilirken hata");
+    }
+  }
 
 }

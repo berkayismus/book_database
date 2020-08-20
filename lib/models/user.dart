@@ -18,7 +18,7 @@ class User{
     user_name = json["user_name"];
     user_email = json["user_email"];
     user_password = json["user_password"];
-    user_status = json["user_status"];
+    user_status = int.tryParse(json["user_status"]);
     user_validate_code = json["user_validate_code"];
   }
 

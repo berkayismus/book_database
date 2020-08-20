@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:book_database/data/api/book_api.dart';
 import 'package:book_database/data/api/comment_api.dart';
+import 'package:book_database/data/api/user_api.dart';
 import 'package:book_database/models/book.dart';
 import 'package:book_database/models/comment.dart';
 import 'package:book_database/models/user.dart';
@@ -32,6 +33,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   // lists
   List<Comment> _commentList = List<Comment>();
+  // yorumlar için
+  List<User> _userList = List<User>();
+  bool _userVisibleState = false;
 
 
   @override
@@ -107,7 +111,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   void _showCommentsClicked() {
-    _commentList.clear();
     getCommentsFromApi();
     setState(() {
       _bookDetailState = false;
@@ -129,7 +132,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       child: ListTile(
         title: Text("${_commentList[index].comment_detail}",style: _customCommentTextStyle(),),
         subtitle: Text("${_commentList[index].comment_created_date}"),
-        trailing: Text(""),
+        trailing: Text(_userVisibleState == true ? _userList[index].user_name : ""),
       ),
     );
   }
@@ -155,10 +158,26 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       setState(() {
         Iterable commentList = jsonDecode(response.body);
         this._commentList = commentList.map((comment) => Comment.fromJson(comment)).toList();
-        // getUserFromApi(_commentList); // yorumlarda, yorumu yapanın kullanıcıyı getirmek için
+        getUserFromApi(_commentList);
       });
     });
   }
+
+  void getUserFromApi(List<Comment> commentList) {
+    for(var comment in commentList){
+      UserApi.getUserByUserId(comment.user_id).then((response) {
+        var userJson = jsonDecode(response.body);
+        var newUser = User.fromJson(userJson);
+        _userList.add(newUser);
+      });
+    }
+    setState(() {
+      _userVisibleState = true;
+    });
+  }
+
+
+
 
 
 }
