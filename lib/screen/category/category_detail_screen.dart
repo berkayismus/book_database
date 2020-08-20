@@ -79,7 +79,8 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   }
 
   void _bookClicked(int index) {
-    debugPrint("${_bookList[index].book_name} kitabına tıklandı");
+    //debugPrint("${_bookList[index].book_name} kitabına tıklandı");
+    Navigator.pushNamed(context, "/bookDetail/${_bookList[index].book_id}");
   }
 }
 

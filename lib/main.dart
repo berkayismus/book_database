@@ -1,6 +1,7 @@
 import 'file:///C:/Users/Berkayismus/AndroidStudioProjects/book_database/lib/screen/category/category_detail_screen.dart';
 import 'file:///C:/Users/Berkayismus/AndroidStudioProjects/book_database/lib/screen/category/categoy_add_screen.dart';
 import 'package:book_database/screen/book/book_add_screen.dart';
+import 'package:book_database/screen/book/book_detail_screen.dart';
 import 'package:book_database/screen/book/book_update_screen.dart';
 import 'package:book_database/screen/category/categoy_update_screen.dart';
 import 'package:book_database/screen/dashboard_screen.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         List<String> pathElemanlari = settings.name.split("/"); //  / categoryDetail / 1
         if(pathElemanlari[1]=='categoryDetail'){
           return MaterialPageRoute(builder: (context)=> CategoryDetailScreen(pathElemanlari[2]));
+        }
+        else if(pathElemanlari[1]=='bookDetail'){
+          return MaterialPageRoute(builder: (context)=> BookDetailScreen(pathElemanlari[2]));
         }
         else{
           return null;

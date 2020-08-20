@@ -18,6 +18,16 @@ class BookApi{
       }
     }
     
+    static Future getBookByBookId(String bookId) async {
+      // sadece book_status=1 yani aktif olan kitabı getirir
+      var response = await http.get("$base_url/ibdb/books/book_id/?book_id=$bookId");
+      if(response.statusCode==200){
+        return response;
+      } else{
+        throw("Kitap getirirken hata");
+      }
+    }
+    
     static Future getBooksAll() async {
       // sadece aktif -> book_status = 1 olan kitapları getirir
       var response = await http.get("$base_url/ibdb/books/all.php");
