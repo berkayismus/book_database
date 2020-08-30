@@ -85,6 +85,15 @@ class BookApi{
         throw("Kitap silerken hata");
       }
     }
+    
+    static Future getRandomBook() async {
+      var response = await http.get("$base_url/ibdb/books/random/get");
+      if(response.statusCode==200){
+        return response;
+      } else{
+        throw("Rastgele kitap getirirken hata");
+      }
+    }
   
   }
 
