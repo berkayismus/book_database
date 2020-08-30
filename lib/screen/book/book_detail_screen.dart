@@ -37,6 +37,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   List<User> _userList = List<User>();
   bool _userVisibleState = false;
 
+  // controllers
+  TextEditingController _commentDetailController;
+
 
   @override
   void initState() {
@@ -44,6 +47,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     super.initState();
     getBookFromApi();
     getCommentsFromApi();
+    _commentDetailController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _commentDetailController.dispose();
   }
 
   @override
@@ -119,6 +130,51 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   void _doCommentClicked() {
+    debugPrint("Yorum yapa tıklandı");
+    // alertdialog açılsın
+    _commentDialog();
+  }
+
+  Future<void> _commentDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Yorum yapın'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(_bookVisibleState == true ? "${_book.book_name} adlı kitaba yorum yapıyorsunuz" : ""),
+                SizedBox(height: 25,),
+                TextField(
+                  controller: _commentDetailController,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Yorumunuz buraya gelecek",
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Yorum yap'),
+              onPressed: () {
+                _doComment();
+              },
+            ),
+            FlatButton(
+              child: Text("Kapat"),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _showDetailClicked() {
@@ -174,6 +230,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     setState(() {
       _userVisibleState = true;
     });
+  }
+
+  void _doComment() {
+    // yorum yapma api 'ını çalıştıracak fonksiyon
+    CommentApi.doComment("1", _book.book_id, _commentDetailController.text)
+        .then((response) {
+          Navigator.pop(context);
+        });
   }
 
 
