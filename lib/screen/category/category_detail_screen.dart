@@ -56,7 +56,9 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
         itemBuilder: (context,index){
       return ListTile(
         leading: Icon(Icons.book),
-        title: Text(_bookList[index].book_name),
+        trailing: Icon(Icons.arrow_forward),
+        title: Text("${index+1} - " + _bookList[index].book_name,style: _customBookNameStyle(),),
+        subtitle: Text(_bookList[index].book_detail.substring(0,150),style: _customBookDetailStyle(),),
         onTap: (){_bookClicked(index);},
       );
     });
@@ -81,6 +83,22 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   void _bookClicked(int index) {
     //debugPrint("${_bookList[index].book_name} kitabına tıklandı");
     Navigator.pushNamed(context, "/bookDetail/${_bookList[index].book_id}");
+  }
+
+  _customBookNameStyle() {
+    return TextStyle(
+        color: Colors.red,
+        fontSize: 18,
+        fontWeight: FontWeight.bold
+    );
+  }
+
+  _customBookDetailStyle() {
+    return TextStyle(
+        color: Colors.teal,
+        fontSize: 14,
+        fontWeight: FontWeight.bold
+    );
   }
 }
 

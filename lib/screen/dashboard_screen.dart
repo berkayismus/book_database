@@ -105,14 +105,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     var iconButtonList = new List<Widget>();
     if(choosenIndex==0){
       iconButtonList.clear();
-      iconButtonList.add(IconButton(iconSize: 24,onPressed: (){},icon: Icon(Icons.map),));
+      iconButtonList.add(IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),));
       return iconButtonList;
     }
     else if(choosenIndex==1){
       iconButtonList.clear();
       iconButtonList.add(IconButton(iconSize: 24,onPressed: _goToAddCategory,icon: Icon(Icons.add),));
       iconButtonList.add(IconButton(iconSize: 24,onPressed: _goToUpdateCategory,icon: Icon(Icons.update),));
-      iconButtonList.add(IconButton(iconSize: 24,onPressed: _userLogout,icon: Icon(Icons.power),));
       return iconButtonList;
     } else if(choosenIndex==2){
       iconButtonList.clear();

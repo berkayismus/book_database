@@ -107,7 +107,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(_bookVisibleState == true ? _book.book_detail : "",style: _customTextStyle(),),
+          child: Text(_bookVisibleState == true ? _book.book_detail + "\n\n\n Yazar: " + _book.book_author + "\n Sayfa Sayısı: " + _book.book_page_number.toString() + "\n Yayınevi: " + _book.book_publisher : "",style: _customTextStyle(),),
         ),
       ),
     );

@@ -30,6 +30,7 @@ class _DashBoardBookWidgetsState extends State<DashBoardBookWidgets> {
           leading: Icon(Icons.book),
           title: Text(_randomBooks[index].book_name,style: _customBookNameStyle(),),
           subtitle: Text(_randomBooks[index].book_detail.substring(0,150) + "..",style: _customBookDetailStyle(),),
+          trailing: Icon(Icons.arrow_forward),
           onTap: (){ _randomBookClicked(_randomBooks[index].book_id); },
         );
       },
