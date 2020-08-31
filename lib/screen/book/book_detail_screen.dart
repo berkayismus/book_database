@@ -237,6 +237,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     CommentApi.doComment("1", _book.book_id, _commentDetailController.text)
         .then((response) {
           Navigator.pop(context);
+          setState(() {
+            if(_userVisibleState==true){
+              _bookDetailState = true;
+            }
+          });
         });
   }
 
