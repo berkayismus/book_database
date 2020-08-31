@@ -29,7 +29,7 @@ class _DashBoardBookWidgetsState extends State<DashBoardBookWidgets> {
         return ListTile(
           leading: Icon(Icons.book),
           title: Text(_randomBooks[index].book_name,style: _customBookNameStyle(),),
-          subtitle: Text(_randomBooks[index].book_detail.substring(0,150) + "..",style: _customBookDetailStyle(),),
+          subtitle: Text(_randomBooks[index].book_detail.length>150 ? _randomBooks[index].book_detail.substring(0,150) + "..." : _randomBooks[index].book_detail,style: _customBookDetailStyle(),),
           trailing: Icon(Icons.arrow_forward),
           onTap: (){ _randomBookClicked(_randomBooks[index].book_id); },
         );

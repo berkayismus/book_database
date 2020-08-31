@@ -58,7 +58,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
         leading: Icon(Icons.book),
         trailing: Icon(Icons.arrow_forward),
         title: Text("${index+1} - " + _bookList[index].book_name,style: _customBookNameStyle(),),
-        subtitle: Text(_bookList[index].book_detail.substring(0,150),style: _customBookDetailStyle(),),
+        subtitle: Text(_bookList[index].book_detail.length>150 ? _bookList[index].book_detail.substring(0,150) + "..." : _bookList[index].book_detail,style: _customBookDetailStyle(),),
         onTap: (){_bookClicked(index);},
       );
     });

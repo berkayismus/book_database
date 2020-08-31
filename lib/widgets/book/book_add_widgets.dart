@@ -192,7 +192,7 @@ class _BookAddWidgetsState extends State<BookAddWidgets> {
     );
   }
 
-  void _bookAddClicked() {
+  void  _bookAddClicked() {
     // kitap ekleme butonuna basıldığında burası çalışacak
     String bookName = _bookNameController.text;
     String bookDetail = _bookDetailController.text;

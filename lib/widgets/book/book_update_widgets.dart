@@ -227,15 +227,15 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
   }
 
   buildBooksField() {
-    return Padding(
-      padding: EdgeInsets.only(top: fieldSpaceHeight,bottom: fieldSpaceHeight),
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
       child: Row(
-        children: <Widget>[
-          Text("Kitaplar",style: _customTextStyle(),),
-          SizedBox(width: 20,),
-          buildDDMenu(),
-        ],
-      ),
+          children: <Widget>[
+            Text("Kitaplar",style: _customTextStyle(),),
+            SizedBox(width: 20,),
+            buildDDMenu(),
+          ],
+        ),
     );
   }
 
@@ -273,7 +273,7 @@ class _BookUpdateWidgetsState extends State<BookUpdateWidgets> {
     return TextStyle(
       color: Colors.pink,
       fontWeight: FontWeight.bold,
-      fontSize: 22,
+      fontSize: 18,
     );
   }
 
