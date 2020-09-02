@@ -4,7 +4,9 @@ import 'package:book_database/data/api/user_api.dart';
 import 'package:book_database/models/book.dart';
 import 'package:http/http.dart' as http;
 
-final String base_url = "http://10.0.3.2";
+final String base_url = "http://10.0.3.2"; // localhost
+// final String base_url = "https://berkayismus.site"; // remote server
+
 
 class BookApi{
 

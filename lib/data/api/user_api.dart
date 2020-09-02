@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:book_database/models/user.dart';
 import 'package:http/http.dart' as http;
 
-
-final String baseUrl = "http://10.0.3.2";
+final String baseUrl = "http://10.0.3.2"; // localhost
+// final String baseUrl = "https://berkayismus.site"; // remote server
 
 class UserApi{
 
