@@ -1,16 +1,48 @@
-# book_database
+# Özet ve Kurulum Rehberi
 
-Books and more.
+Merhaba, 'Kitabını oyla mobil uygulaması' uzak sunucuya kitap eklemenize, düzenlemenize, ve yorumlamanıza olanak tanıyor. Diğer kullanıcıların yaptığı yorumları görebilir, bu sayede kitaplar hakkında fikir edinebilirsiniz. Okuduğunuz kitaplara yorum yapabilir, diğer kullanıcıların fikir edinmesine katkıda bulunabilirsiniz.
 
-## Getting Started
+**Uygulamayı geliştirirken kullandığım teknolojiler ve programlama dilleri:**
 
-This project is a starting point for a Flutter application.
+mobil uygulama tarafında; `Dart,Flutter`
 
-A few resources to get you started if this is your first Flutter project:
+web servis tarafında; `PHP(core)`
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+veritabanı tarafında: `MySQL`
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter, Google’ın cross-platform çalışan uygulamalar geliştirmek amacıyla ortaya çıkardığı bir SDK(Software Development Kit)’dır.
+
+Flutter kullanarak IOS,Android,Web hatta Masaüstü uygulamalar geliştirebilirsiniz.
+
+**Projeyi çalıştırabilmek için** öncelikle bilgisayarınızda kurulu değilse, aşağıdaki programları kurmanız gerekiyor.
+
+[Java 8](https://www.oracle.com/tr/java/technologies/javase/javase-jdk8-downloads.html)
+
+[Flutter SDK kurulumu](https://flutter.dev/docs/get-started/install)
+
+[Android Studio kurulumu](https://flutter.dev/docs/get-started/editor)
+
+[Genymotion(Emülatör) kurulumu](https://www.youtube.com/watch?v=ci8gCf5rd1Q)
+
+(isteğe bağlı) [Tüm programların detaylı kurulum videoları](https://www.youtube.com/watch?v=nJ8PBr1hyQ8&list=PLSg_-k7KzeO_cbv7LhF5zLNY-_JhT_ZX4)
+
+Gerekli kurulumları tamamladıktan sonra, projeyi indirin ve sıradaki yönergeleri takip edin.
+
+# Android studio ve Genymotion ile uygulamayı çalıştırma
+
+İndirdiğiniz proje dosyasını zipten çıkarın. Klasörü **C:\Users\\<Kullanıcı Adınız>\AndroidStudioProjects** içine atın. Ardından **Android Studio**'yu açın.
+**File** menüsünden **Open** seçeneğine tıklayın. Karşınıza şöyle bir pencere gelecek;
+![proje seçimi](https://www.linkpicture.com/q/1_252.jpg)
+
+Görselde görüldüğü gibi **book_database**'i seçin ve **Ok**'e tıklayın. Karşınıza gelen pencereden **This Window**'u seçin.
+
+
+## Projeyi emülatörde çalıştırma
+
+Genymotion'ı açın ve daha önceden oluşturduğunuz, sanal telefonu çalıştırın. Sanal telefonunuz çalıştıktan sonra; Android Studio'ya geri dönün.
+Aşağıda yeşil renkte gösterilen Play ikonuna basın. 
+![start application](https://www.linkpicture.com/q/Ekran-Al%C4%B1nt%C4%B1s%C4%B1_36.jpg)
+
+Uygulamanın apk dosyası sanal telefonunuza gönderildikten sonra çalıştırılacaktır. Herşeyi eksiksiz yaptıysanız, şöyle bir ekranla karşılaşmanız gerekiyor;
+![tebrikler](https://www.linkpicture.com/q/3_165.jpg)
+Tebrikler, uygulamayı çalıştırdınız! Giriş yaptıktan sonra kullanmaya başlayabilirsiniz.
