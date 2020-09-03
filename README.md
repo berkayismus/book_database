@@ -1,6 +1,6 @@
 # Özet ve Kurulum Rehberi
 
-Merhaba, Kitabını oyla mobil uygulaması uzak sunucuya kitap eklemenize, düzenlemenize, ve yorumlamanıza olanak tanıyor. Diğer kullanıcıların yaptığı yorumları görebilir, bu sayede kitaplar hakkında fikir edinebilirsiniz. Okuduğunuz kitaplara yorum yapabilir, diğer kullanıcıların fikir edinmesine katkıda bulunabilirsiniz.
+Merhaba, Kitabını oyla mobil uygulaması, uzak sunucuya kitap eklemenize, düzenlemenize, ve yorumlamanıza olanak tanıyor. Diğer kullanıcıların yaptığı yorumları görebilir, bu sayede kitaplar hakkında fikir edinebilirsiniz. Okuduğunuz kitaplara yorum yapabilir, diğer kullanıcıların fikir edinmesine katkıda bulunabilirsiniz.
 
 **Uygulamayı geliştirirken kullandığım teknolojiler ve programlama dilleri:**
 
