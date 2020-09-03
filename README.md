@@ -24,6 +24,8 @@ Flutter kullanarak IOS,Android,Web hatta Masaüstü uygulamalar geliştirebilirs
 
 [Genymotion(Emülatör) kurulumu](https://www.youtube.com/watch?v=ci8gCf5rd1Q)
 
+[Web servis kurulumu](https://github.com/berkayismus/book_database_web_service#%C3%B6zet-ve-kurulum-rehberi)
+
 (isteğe bağlı) [Tüm programların detaylı kurulum videoları](https://www.youtube.com/watch?v=nJ8PBr1hyQ8&list=PLSg_-k7KzeO_cbv7LhF5zLNY-_JhT_ZX4)
 
 Gerekli kurulumları tamamladıktan sonra, projeyi indirin ve sıradaki yönergeleri takip edin.
